@@ -1,0 +1,15 @@
+.idea/workspace.xml
+.idea/dictionaries/
+ETL8G/
+target/
+tmp/
+temp/
+__pycache__/
+Thumbs.db
+*.aux
+*.dvi
+*.log
+*.pdf
+*.gz
+*.dat
+.~lock.*
