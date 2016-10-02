@@ -47,9 +47,7 @@ def my_init(shape, name=None):
 
 
 # Best val_acc: 0.9679 (just tried only once)
-# On Amazon EC2 g2.2xlarge (NVIDIA GRID K520)
-# - 14 minutes for TensorFlow 0.10.0 backend
-# - 25 minutes for Theano 0.8.2 backend
+# 14 minutes on Amazon EC2 g2.2xlarge (NVIDIA GRID K520)
 def m6_1():
     model.add(Convolution2D(32, 3, 3, init=my_init, input_shape=input_shape))
     model.add(Activation('relu'))
