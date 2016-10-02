@@ -17,7 +17,7 @@ nb_classes = 72
 img_rows, img_cols = 64, 64
 # img_rows, img_cols = 127, 128
 
-ary = np.load("hiragana.npz")['arr_0'].reshape([-1, 127, 128]).astype(np.float32) / 15.0
+ary = np.load("hiragana.npz")['arr_0'].reshape([-1, 127, 128]).astype(np.float32) / 15
 X_train = np.zeros([nb_classes * 160, img_rows, img_cols], dtype=np.float32)
 for i in range(nb_classes * 160):
     X_train[i] = scipy.misc.imresize(ary[i], (img_rows, img_cols), mode='F')
@@ -47,7 +47,9 @@ def my_init(shape, name=None):
 
 
 # Best val_acc: 0.9679 (just tried only once)
-# 25 minutes on Amazon EC2 g2.2xlarge
+# On Amazon EC2 g2.2xlarge (NVIDIA GRID K520)
+# - 14 minutes for TensorFlow 0.10.0 backend
+# - 25 minutes for Theano 0.8.2 backend
 def m6_1():
     model.add(Convolution2D(32, 3, 3, init=my_init, input_shape=input_shape))
     model.add(Activation('relu'))
