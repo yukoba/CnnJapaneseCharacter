@@ -1,9 +1,19 @@
+# What is this?
+Japanese hand written Hiragana (ひらがな) recoginition by deep learning. Accuracy is **99.57%**.
+
 # Papers
-I implemented Charlie Tsai "Recognizing Handwritten Japanese Characters Using Deep Convolutional Neural Networks".
+My implementation is based on Charlie Tsai's "Recognizing Handwritten Japanese Characters Using Deep Convolutional Neural Networks".
 http://cs231n.stanford.edu/reports2016/262_Report.pdf
 
 This is just a VGG-like convnet.
 https://arxiv.org/abs/1409.1556
+
+# What I modified
+- Resized image to 32x32 px. Charlie Tsai's paper is 64x64 px.
+- Initial weights are from a normal distribution with 0.1 standard deviation.
+- Used AdaDelta and increased the number of epochs to 250.
+
+By these changes the accuracy increased from 96.13% to 99.57%.
 
 # Librarys
 You need following librarys.
