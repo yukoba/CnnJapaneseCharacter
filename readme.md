@@ -1,5 +1,5 @@
 # What is this?
-Japanese hand written Hiragana (ひらがな) recoginition by deep learning. Accuracy is **99.57%**.
+Japanese hand written Hiragana (ひらがな) recoginition by deep learning. Accuracy is **99.78%**.
 
 # Papers
 My implementation is based on Charlie Tsai's "Recognizing Handwritten Japanese Characters Using Deep Convolutional Neural Networks".
@@ -11,9 +11,10 @@ https://arxiv.org/abs/1409.1556
 # What I modified
 - Resized image to 32x32 px. Charlie Tsai's paper is 64x64 px.
 - Initial weights are from a normal distribution with 0.1 standard deviation.
-- Used AdaDelta and increased the number of epochs to 250.
+- Used AdaDelta and increased the number of epochs to 400.
+- Add random rotation and zoom to images.
 
-By these changes the accuracy increased from 96.13% to 99.57%.
+By these changes the accuracy increased from 96.13% to 99.78%.
 
 # Librarys
 You need following librarys.

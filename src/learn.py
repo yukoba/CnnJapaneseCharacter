@@ -9,6 +9,7 @@ from keras import initializations
 from keras.layers import Convolution2D, MaxPooling2D
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.models import Sequential
+from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import np_utils
 from sklearn.cross_validation import train_test_split
 
@@ -39,6 +40,9 @@ else:
 Y_train = np_utils.to_categorical(Y_train, nb_classes)
 Y_test = np_utils.to_categorical(Y_test, nb_classes)
 
+datagen = ImageDataGenerator(rotation_range=15, zoom_range=0.20)
+datagen.fit(X_train)
+
 model = Sequential()
 
 
@@ -46,8 +50,8 @@ def my_init(shape, name=None):
     return initializations.normal(shape, scale=0.1, name=name)
 
 
-# Best val_loss: 0.0251 - val_acc: 0.9957 (just tried only once)
-# 20 minutes on Amazon EC2 g2.2xlarge (NVIDIA GRID K520)
+# Best val_loss: 0.0205 - val_acc: 0.9978 (just tried only once)
+# 30 minutes on Amazon EC2 g2.2xlarge (NVIDIA GRID K520)
 def m6_1():
     model.add(Convolution2D(32, 3, 3, init=my_init, input_shape=input_shape))
     model.add(Activation('relu'))
@@ -85,4 +89,5 @@ m6_1()
 # classic_neural()
 
 model.compile(loss='categorical_crossentropy', optimizer='adadelta', metrics=['accuracy'])
-model.fit(X_train, Y_train, batch_size=16, nb_epoch=250, validation_data=(X_test, Y_test))
+model.fit_generator(datagen.flow(X_train, Y_train, batch_size=16), samples_per_epoch=X_train.shape[0],
+                    nb_epoch=400, validation_data=(X_test, Y_test))
