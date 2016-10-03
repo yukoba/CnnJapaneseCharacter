@@ -4,17 +4,17 @@
 
 import numpy as np
 import scipy
-from sklearn.cross_validation import train_test_split
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
-from keras.layers import Convolution2D, MaxPooling2D
-from keras.utils import np_utils
-from keras import initializations
 from keras import backend as K
+from keras import initializations
+from keras.layers import Convolution2D, MaxPooling2D
+from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.models import Sequential
+from keras.utils import np_utils
+from sklearn.cross_validation import train_test_split
 
 nb_classes = 72
 # input image dimensions
-img_rows, img_cols = 64, 64
+img_rows, img_cols = 32, 32
 # img_rows, img_cols = 127, 128
 
 ary = np.load("hiragana.npz")['arr_0'].reshape([-1, 127, 128]).astype(np.float32) / 15
@@ -46,8 +46,8 @@ def my_init(shape, name=None):
     return initializations.normal(shape, scale=0.1, name=name)
 
 
-# Best val_acc: 0.9679 (just tried only once)
-# 14 minutes on Amazon EC2 g2.2xlarge (NVIDIA GRID K520)
+# Best val_loss: 0.0251 - val_acc: 0.9957 (just tried only once)
+# 20 minutes on Amazon EC2 g2.2xlarge (NVIDIA GRID K520)
 def m6_1():
     model.add(Convolution2D(32, 3, 3, init=my_init, input_shape=input_shape))
     model.add(Activation('relu'))
@@ -71,7 +71,6 @@ def m6_1():
     model.add(Activation('softmax'))
 
 
-# Best val_acc: 0.8016 (just tried only once)
 def classic_neural():
     model.add(Flatten(input_shape=input_shape))
     model.add(Dense(256))
@@ -85,5 +84,5 @@ def classic_neural():
 m6_1()
 # classic_neural()
 
-model.compile(loss='categorical_crossentropy', optimizer='adagrad', metrics=['accuracy'])
-model.fit(X_train, Y_train, batch_size=16, nb_epoch=40, validation_data=(X_test, Y_test))
+model.compile(loss='categorical_crossentropy', optimizer='adadelta', metrics=['accuracy'])
+model.fit(X_train, Y_train, batch_size=16, nb_epoch=250, validation_data=(X_test, Y_test))
