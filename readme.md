@@ -56,7 +56,7 @@ or TensorFlow backend.
     "epsilon": 1e-07,
     "image_dim_ordering": "tf",
     "floatx": "float32",
-    "backend": "tesorflow"
+    "backend": "tensorflow"
 }
 ```
 Modify both ```image_dim_ordering``` and ```backend```.
