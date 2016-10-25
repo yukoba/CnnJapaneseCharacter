@@ -3,7 +3,7 @@
 # https://github.com/fchollet/keras/blob/master/examples/cifar10_cnn.py
 
 import numpy as np
-import scipy
+import scipy.misc
 from keras import backend as K
 from keras import initializations
 from keras.layers import Convolution2D, MaxPooling2D
