@@ -11,7 +11,7 @@ from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.models import Sequential
 from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import np_utils
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 
 nb_classes = 72
 # input image dimensions
