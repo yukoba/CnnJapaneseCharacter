@@ -88,6 +88,7 @@ def classic_neural():
 m6_1()
 # classic_neural()
 
+model.summary()
 model.compile(loss='categorical_crossentropy', optimizer='adadelta', metrics=['accuracy'])
 model.fit_generator(datagen.flow(X_train, Y_train, batch_size=16), samples_per_epoch=X_train.shape[0],
                     nb_epoch=400, validation_data=(X_test, Y_test))
